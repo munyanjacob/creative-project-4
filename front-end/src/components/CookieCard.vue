@@ -4,7 +4,7 @@
         <div class="row gx-0">
             <div class="col-sm-12 col-lg-5 px-0">
             <div class="card-body d-flex justify-content-center">
-                <img :src="require('@/assets/'+cookie.imgName+'')" class="cookie-image" :class="{ 'cookie-image-emphasis': emphasis }" alt="Image of cookie.">
+                <img :src="cookie.path" class="cookie-image" :class="{ 'cookie-image-emphasis': emphasis }" alt="Image of cookie.">
             </div>
             </div>
             <div class="col-sm-12 col-lg-7 px-0 align-self-center">
@@ -12,12 +12,12 @@
                 <div class="d-flex justify-content-center mb-4">
                 <div class="cookie-title-wrapper">
                     <h3 class="px-2"><strong>{{cookie.title}}</strong></h3>
-                    <h5> by {{cookie.user}}</h5>
+                    <h5> by {{cookie.name}}</h5>
                 </div>
                 </div>
                 <p>{{cookie.description}}</p>
                 <div class="d-flex justify-content-center cookie-description-wrapper">
-                <p>Rated: <strong>{{cookie.avgRating}}</strong> from <strong>{{cookie.numRatings}}</strong> reviews.</p>
+                <p>Rated: <strong>{{cookie.rating}}</strong></p>
                 </div>
             </div>
             </div>
@@ -34,7 +34,6 @@ export default {
         emphasis: Boolean,
     },
     created(){
-        console.log(this.cookie.imgName);
     },
 }
 </script>

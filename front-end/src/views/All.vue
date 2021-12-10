@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import CookieList from "@/components/CookieList.vue";
 export default {
   name: 'All',
@@ -20,13 +21,27 @@ export default {
   },
   data() {
     return {
+      cookies: [],
       searchText: '',
     }
   },
   computed: {
-    cookies() {
-      return this.$root.$data.cookies.filter(cookie => (cookie.title + cookie.description + cookie.user).toLowerCase().search(this.searchText.toLowerCase()) >= 0).sort((a, b) => (a.avgRating < b.avgRating) ? 1 : -1);
-    }
+    // cookies() {
+    //   return this.$root.$data.cookies.filter(cookie => (cookie.title + cookie.description + cookie.user).toLowerCase().search(this.searchText.toLowerCase()) >= 0).sort((a, b) => (a.avgRating < b.avgRating) ? 1 : -1);
+    // }
+  },
+  created() {
+    this.getCookies();
+  },
+  methods: {
+    async getCookies() {
+        try {
+          this.response = await axios.get("/api/cookies");
+          this.cookies = this.response.data;
+        } catch (error) {
+          this.error = error.response.data.message;
+        }
+      },
   },
 }
 </script>
